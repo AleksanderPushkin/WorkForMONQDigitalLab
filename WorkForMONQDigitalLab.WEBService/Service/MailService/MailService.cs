@@ -53,13 +53,8 @@ namespace WorkForMONQDigitalLab.WEBService.Service.MailService
                 return Tuple.Create<ActionResult, string>(ActionResult.Failed, ex.Message);
             }
         }
-        /// <summary>
-        /// Formation email
-        /// </summary>
-        /// <param name="emails">Recipient list </param>
-        /// <param name="subject"></param>
-        /// <param name="message"></param>
-        /// <returns></returns>
+       
+      
         private MimeMessage GenerateMimeMessage(IEnumerable<string> emails, string subject, string message)
         {
             var mimeMessage = new MimeMessage();

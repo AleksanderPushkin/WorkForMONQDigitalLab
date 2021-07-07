@@ -25,10 +25,10 @@ namespace WorkForMONQDigitalLab.WEBService.Service.MONQMailService
         /// <summary>
         /// Give a list of all sent messages
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of send emails protocols</returns>
         public IEnumerable<MailDTO> Get()
         {
-            return _db.Mails.AsNoTracking().ToList().Select(t => new MailDTO { Body = t.Body, CreatedAt = t.CreatedAt, Recipients = t.Recipients.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries), Result = t.Result, Subject = t.Subject });
+            return _db.Mails.AsNoTracking().ToList().Select(t => new MailDTO { Body = t.Body, CreatedAt = t.CreatedAt, Recipients = t.Recipients.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries), Result = t.Result, FailedMessage= t.FailedMessage, Subject = t.Subject });
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace WorkForMONQDigitalLab.WEBService.Service.MONQMailService
         /// </summary>
         /// <param name="sendMailDTO"></param>
         /// <exception cref="ArgumentNullException">when SendMailDTO is null</exception>
-        /// <returns></returns>
+        /// <returns>result of message sending</returns>
         public async Task<Tuple<ActionResult, string>> SendMailAsync(SendMailDTO sendMailDTO)
         {
             try
